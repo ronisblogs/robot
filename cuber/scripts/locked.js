@@ -86,7 +86,6 @@ ERNO.Locked = function ( cube, camera, domElement ) {
 		}
 	}
 
-
 	function onInteractEnd( event ){
 		domElement.addEventListener( 'mousedown', 	onInteractStart );
 		document.removeEventListener( 'mousemove',	onInteractMove );
@@ -288,7 +287,7 @@ ERNO.Locked = function ( cube, camera, domElement ) {
 	
 		// If we have an axis to rotate on, then we can calculate how much to rotate by
 
-		if( axisDefined ){
+		if( group && axisDefined ){
 			angle = -( absDirection.dot( direction ) / cube.size ) ;
 			if( group === cube.slicesDictionary[ 'z' ]  ) angle *= -1;
 			angle *= sign;
