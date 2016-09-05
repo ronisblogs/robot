@@ -9,10 +9,10 @@ $(document).ready( function(){
 	//server.twist('l');
 	server = null
 	function loadCmd() {
-		 $.get("cmd",function(data,status){
+		 $.get("?cmd",function(data,status){
 			if ("success"==status)
 			{
-				/*console.log(data)
+				console.log(data)
 				if(54==data.length){
 					colors1=data.substring(0,27);
 					colors2=data.substring(27);
@@ -22,7 +22,7 @@ $(document).ready( function(){
 				else if (1==data.length)
 				{
 					server.twist(data);
-				}*/
+				}
 			}
 		});
 	}
