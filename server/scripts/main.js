@@ -37,11 +37,9 @@ $(document).ready( function(){
 		 $.get("?cmd",function(data,status){
 			if ("success"==status)
 			{
+				console.log(data)
 				if(54==data.length){
-					colors1=data.substring(0,27);
-					colors2=data.substring(27);
-				
-					server = new CuberServer(colors1,colors2);
+					server = new CuberServer(data);
 				}
 				else if (1==data.length)
 				{

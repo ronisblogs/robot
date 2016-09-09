@@ -11,7 +11,7 @@ import kociemba
 class CubeSolver:
     def __init__(self,colors=None):
         if colors is None:
-            self.add_new_cube("WWWGGGWWWGGGWWWGGGRRRRRRRRRYYYBBBYYYBBBYYYBBBOOOOOOOOO")
+            self.add_new_cube("BBBBBBBBBRRRRRRRRRWWWWWWWWWGGGGGGGGGOOOOOOOOOYYYYYYYYY")
 
     def add_task(self,task):
         url = "http://127.0.0.1:8080/&"+task
@@ -32,13 +32,13 @@ class CubeSolver:
         self.add_task(cmd)
 
     def convert_faces(self,colors):
-	    str_faces = ""
+	str_faces = ""
         d = {'W':'F','O':'L','B':'U','R':'R','G':'D','Y':'B'}
-	    for c in colors.upper():
+	for c in colors.upper():
             str_faces += d.get(c)
 
         return str_faces
-}
+
 
 def test():
     cube_solver = CubeSolver()
