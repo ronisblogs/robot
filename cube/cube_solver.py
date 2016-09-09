@@ -8,10 +8,7 @@
 import httplib
 import kociemba
 
-class CubeSolver:
-    def __init__(self,colors=None):
-        if colors is None:
-            self.add_new_cube("BBBBBBBBBRRRRRRRRRWWWWWWWWWGGGGGGGGGOOOOOOOOOYYYYYYYYY")
+class CubeSolver(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     def add_task(self,task):
         url = "http://127.0.0.1:8080/&"+task
@@ -26,7 +23,7 @@ class CubeSolver:
         self.add_task(cube)
         faces = self.convert_faces(cube)
         steps = kociemba.solve(faces)
-        print steps
+        return steps
 
     def add_new_twist(self,cmd):
         self.add_task(cmd)
@@ -39,9 +36,23 @@ class CubeSolver:
 
         return str_faces
 
+    def send_head(self):
+        path = self.path
 
-def test():
-    cube_solver = CubeSolver()
+        path = path[0].split('&', 1)
+        if 1<len(path): # cube set
+            cube = path[1]
+            self.send_response(200)
+            self.send_header("Content-type", 'text/plain')
+            self.end_headers()
+            self.wfile.write(self.add_new_cube(cube))
+            return None
 
-if __name__ == "__main__":
-    test()
+        return SimpleHTTPServer.SimpleHTTPRequestHandler.send_head(self)
+
+
+
+PORT = 8000
+httpd = SocketServer.TCPServer(("", PORT), CubeSolver)
+print "serving at port", PORT
+httpd.serve_forever()
