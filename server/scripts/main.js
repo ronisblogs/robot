@@ -12,7 +12,6 @@ $(document).ready( function(){
 		 $.get("?cmd",function(data,status){
 			if ("success"==status)
 			{
-				console.log(data)
 				if(54==data.length){
 					colors1=data.substring(0,27);
 					colors2=data.substring(27);
@@ -21,8 +20,12 @@ $(document).ready( function(){
 				}
 				else if (1==data.length)
 				{
-					server.twist(data);
+					if ("XxRrMmLlYyUuEeDdZzFfSsBb".indexOf(data)>-1)
+					{
+						server.twist(data);
+					}
 				}
+				setTimeout(loadCmd,100);
 			}
 		});
 	}
