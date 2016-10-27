@@ -39,7 +39,8 @@ ERNO.Locked = function ( cube, camera, domElement ) {
 	}
 
 	function onInteractStart( event ){
-		if(0!=event.button) return
+		//if(0!=event.button) return
+		return;
 
 		if ( api.enabled && projector.getIntersection( camera, ( event.touches && event.touches[0] || event ).pageX, ( event.touches && event.touches[0] || event ).pageY ) === null ){
 			screen = getBoundingClientRect( domElement );
@@ -73,6 +74,7 @@ ERNO.Locked = function ( cube, camera, domElement ) {
 	}
 
 	function onInteractMove( event ){
+		return;
 		if( api.enabled ){
 			event.preventDefault();
 
@@ -87,6 +89,7 @@ ERNO.Locked = function ( cube, camera, domElement ) {
 	}
 
 	function onInteractEnd( event ){
+		return;
 		domElement.addEventListener( 'mousedown', 	onInteractStart );
 		document.removeEventListener( 'mousemove',	onInteractMove );
 		document.removeEventListener( 'mouseup',  	onInteractEnd );
@@ -225,8 +228,8 @@ ERNO.Locked = function ( cube, camera, domElement ) {
 		}
 	}()
 
-	domElement.addEventListener( 'mousedown', 	onInteractStart );
-	domElement.addEventListener( 'touchstart',  onInteractStart );
+	//domElement.addEventListener( 'mousedown', 	onInteractStart );
+	//domElement.addEventListener( 'touchstart',  onInteractStart );
 
 	api.update = function(){
 		// get a direction of movment

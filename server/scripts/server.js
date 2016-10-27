@@ -27,8 +27,8 @@
 */
 
 CuberServer = function(colors) {
-	var useLockedControls = true,
-		controls = useLockedControls ? ERNO.Locked : ERNO.Freeform;
+	//var useLockedControls = true,
+	//	controls = useLockedControls ? ERNO.Locked : ERNO.Freeform;
 
 	var ua = navigator.userAgent,
 		isIe = ua.indexOf('MSIE') > -1 || ua.indexOf('Trident/') > -1;
@@ -42,19 +42,18 @@ CuberServer = function(colors) {
 	
 	cube = new ERNO.Cube({
 		hideInvisibleFaces: true,
-		controls: controls,
+		controls: ERNO.Locked,
 		renderer: isIe ? ERNO.renderers.IeCSS3D : null,
 		cubelets: CuberServer.getCube(colors)
 	});
 	container.appendChild(cube.domElement );
 	
-	if( controls === ERNO.Locked ){
-		var fixedOrientation = new THREE.Euler(  Math.PI * 0.1, Math.PI * -0.25, 0 );
-		cube.object3D.lookAt( cube.camera.position );
-		cube.rotation.x += fixedOrientation.x;
-		cube.rotation.y += fixedOrientation.y;
-		cube.rotation.z += fixedOrientation.z;
-	}
+
+	var fixedOrientation = new THREE.Euler(  Math.PI * 0.1, Math.PI * -0.25, 0 );
+	cube.object3D.lookAt( cube.camera.position );
+	cube.rotation.x += fixedOrientation.x;
+	cube.rotation.y += fixedOrientation.y;
+	cube.rotation.z += fixedOrientation.z;
 	
 
 	// The deviceMotion function provide some subtle mouse based motion

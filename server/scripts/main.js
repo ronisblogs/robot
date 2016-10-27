@@ -37,7 +37,6 @@ $(document).ready( function(){
 		 $.get("?cmd",function(data,status){
 			if ("success"==status)
 			{
-				console.log(data)
 				if(54==data.length){
 					server = new CuberServer(data);
 				}
