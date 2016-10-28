@@ -28,6 +28,13 @@ GPIOS = [GPIO.PG0,
         GPIO.PG10,
         GPIO.PG11]
 
+FRONT_MOTOR = 0
+UP_MOTOR = 1
+RIGHT_MOTOR = 2
+LEFT_MOTOR = 3
+DOWN_MOTOR = 4
+BACK_MOTOR = 5
+
 CLOCKWISE = True
 ANTI_CLOCKWISE = False
 
@@ -38,6 +45,8 @@ def motor_init():
 
     for gpio in GPIOS:
         GPIO.setcfg(gpio, GPIO.OUT)
+    
+    return True
 
 def motor_step(motor_id, dir, steps):
     clock_wise = GPIO.HIGH
@@ -56,7 +65,11 @@ def motor_step(motor_id, dir, steps):
         GPIO.output(GPIOS[motor_id*2+1],GPIO.LOW)
         time.sleep(0.001)
 
-if not motor_init():
-    while True:
-        motor_step(0, CLOCKWISE, 50)
-        time.sleep(1)
+def test():
+    if motor_init():
+        while True:
+            motor_step(0, CLOCKWISE, 50)
+            time.sleep(1)
+
+if __name__ == "__main__":
+    test()
