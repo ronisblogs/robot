@@ -12,8 +12,9 @@ motor4:
 motor5:
     dir: PG10   step:   PG11
 '''
-import SUNXI_GPIO as GPIO
 import time
+import SUNXI_GPIO as GPIO
+
 
 GPIOS = [GPIO.PG0,
         GPIO.PG3,
@@ -28,11 +29,11 @@ GPIOS = [GPIO.PG0,
         GPIO.PG10,
         GPIO.PG11]
 
-FRONT_MOTOR = 0
-UP_MOTOR = 1
-RIGHT_MOTOR = 2
-LEFT_MOTOR = 3
-DOWN_MOTOR = 4
+UP_MOTOR = 0
+RIGHT_MOTOR = 1
+FRONT_MOTOR = 2
+DOWN_MOTOR = 3
+LEFT_MOTOR = 4
 BACK_MOTOR = 5
 
 CLOCKWISE = True

@@ -9,8 +9,9 @@ import httplib
 import kociemba
 import time
 
-import motor
 import recognizer
+import platform
+
 
 TWIST_TIME = 1
 
@@ -39,6 +40,8 @@ class CubeSolver():
             self.execute_one_step(step)
             time.sleep(TWIST_TIME)
 
+        self.is_solving = False
+
     def execute_one_step(self,step):
         # "D2 R' D' F2 B D R2 D2 R' F2 D' F2 U' B2 L2 U2 D R2 U"
         if 1==len(step):
@@ -55,8 +58,10 @@ class CubeSolver():
             self.motor_step(step[0])
 
     def motor_step(self, step):
-        print step
+        if platform.platform()=="Linux-3.4.79-armv7l-with-Linaro-14.04-trusty":
+            import motor
 
+        print step
 
     def convert_faces(self,colors):
         # color to face
@@ -77,13 +82,19 @@ class CubeSolver():
         return str_faces
 
     def display_task(self,task):
-        url = "http://127.0.0.1:8080/&"+task
-        conn = httplib.HTTPConnection("127.0.0.1:8080")
-        conn.request(method="GET",url=url)
+        if not self.display:
+            return
 
-        response = conn.getresponse()
-        res=response.read()
-        print res
+        url = "http://" + self.server + "/&"+task
+        try:
+            conn = httplib.HTTPConnection(self.server)
+            conn.request(method="GET",url=url)
+
+            response = conn.getresponse()
+            res=response.read()
+            print res
+        except:
+            self.display = False
 
     def run_forever(self):
         if not self.is_solving: # the robot is idle
